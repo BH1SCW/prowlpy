@@ -35,8 +35,13 @@
 Example notification using prowl.
 """
 import prowlpy
+import os
 
-apikey = '' #Dummy API-key)
+# 从环境变量读取 API key
+apikey = os.getenv('PROWL_API_KEY')
+if not apikey:
+    raise ValueError("please provide PROWL_API_KEY export PROWL_API_KEY='your_api_key'")
+
 p = prowlpy.Prowl(apikey)
 try:
     p.add('TestApp','Server Down',"The Web Box isn't responding to a ping", 1, None, "http://www.prowlapp.com/")
